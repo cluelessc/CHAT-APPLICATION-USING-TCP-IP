@@ -15,7 +15,7 @@ def receive():
             else:
                 print(message)
         except:
-                print('An error occurred !')
+                print('An error occurred!')
                 client.close()
                 break
 
