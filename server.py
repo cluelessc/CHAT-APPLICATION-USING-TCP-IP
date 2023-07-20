@@ -1,12 +1,13 @@
 import threading
 import socket
 
-host = '127.0.0.1'
+host = '127.0.0.1'#localhost
 port = 1234
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((host,port))
+server.bind((host, port))
 server.listen()
+
 clients = []
 nicknames = []
 
@@ -23,14 +24,14 @@ def handle(client):
             index = clients.index(client)
             clients.remove(client)
             client.close()
-            nickname =nicknames[index]
+            nickname = nicknames[index]
             broadcast(f'{nickname}left the chat!'.encode('ascii'))
             nicknames.remove(nickname)
             break
 
 def receive():
     while True:
-        client,address = server.accept()
+        client, address = server.accept()
         print(f"Connected with {str(address)}")
 
         client.send("NICK".encode("ascii"))
